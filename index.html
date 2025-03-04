@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service.starlink.ke</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f9b0f, #000000);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 420px;
+            width: 90%;
+            color: #333;
+        }
+        h1 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #148122;
+        }
+        .payment-info {
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #555;
+            background: #e0f7da;
+            padding: 8px;
+            border-radius: 6px;
+        }
+        button {
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px 0;
+            width: 100%;
+            font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+        .payment-btn {
+            background: #148122;
+            color: #ffffff;
+        }
+        .payment-btn:hover {
+            background: #0f7b0f;
+        }
+        .inquiry {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #444;
+            background: #f8f8f8;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+        .email {
+            color: #007bff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .email:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        function redirectToPayment(url) {
+            window.location.href = url;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Select a Package</h1>
+        <div class="payment-info">Starlink Home <i>(Only Safaricom)</i></div>
+
+        <button class="payment-btn" onclick="redirectToPayment('https://payment.intasend.com/pay/51b5caaa-d2f2-4762-9d63-7ca13972431e/')">7 Days - 10GB (Ksh 300)</button>
+        <button class="payment-btn" onclick="redirectToPayment('https://payment.intasend.com/pay/20bbdb1e-7cf4-4ef9-b7be-a8b7ae01f582/')">14 Days - 22GB (Ksh 550)</button>
+        <button class="payment-btn" onclick="redirectToPayment('https://payment.intasend.com/pay/30fb785c-bd4c-4ad3-ad30-d3afd9b74fe4/')">21 Days - 35GB (Ksh 750)</button>
+        <button class="payment-btn" onclick="redirectToPayment('https://payment.intasend.com/pay/55ef9a9d-ecc5-4a29-bb03-ca3505438ed9/')">30 Days - 50GB (Ksh 900)</button>
+        <button class="payment-btn" onclick="redirectToPayment('https://payment.intasend.com/pay/84ec5f9d-df18-4e8a-8427-bf95d222644e/')">6 Months - Unlimited (Ksh 4000)</button>
+
+        <div class="inquiry">
+            <p>In case of inquiry, contact us at:</p>
+            <a href="mailto:starrlinkg@gmail.com" class="email">support@starlink.ke</a>
+        </div>
+    </div>
+</body>
+</html>
