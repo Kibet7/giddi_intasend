@@ -13,7 +13,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             color: #fff;
         }
         .container {
@@ -25,6 +25,7 @@
             max-width: 420px;
             width: 90%;
             color: #333;
+            margin: 20px 0;
         }
         h1 {
             font-size: 26px;
@@ -79,29 +80,143 @@
         .email:hover {
             text-decoration: underline;
         }
-    </style>
-    <script>
-        function redirectToPayment(url) {
-            window.location.href = url;
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
         }
-    </script>
+        .modal-content {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 90%;
+            color: #333;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        .close-modal {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+            color: #888;
+        }
+        .instructions {
+            text-align: left;
+            margin: 15px 0;
+        }
+        .instructions ol {
+            padding-left: 20px;
+        }
+        .instructions li {
+            margin-bottom: 10px;
+        }
+        .proceed-btn {
+            background: #148122;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        .proceed-btn:hover {
+            background: #0f7b0f;
+        }
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        .whatsapp-btn i {
+            margin-right: 8px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <h1>Select a Package</h1>
         <div class="payment-info">Starlink Home <i>(Safaricom, Airtel, Telcom)</i></div>
         
-        <button class="payment-btn" onclick="redirectToPayment('https://checkoutjpv2.jambopay.com/lipa/paybill/22250826')">24 Hours - 7GB (Ksh 130)</button>
-        <button class="payment-btn" onclick="redirectToPayment('https://checkoutjpv2.jambopay.com/lipa/paybill/22250826')">7 Days - 12GB (Ksh 300)</button>
-        <button class="payment-btn" onclick="redirectToPayment('https://checkoutjpv2.jambopay.com/lipa/paybill/22250826')">14 Days - 22GB (Ksh 550)</button>
-        <button class="payment-btn" onclick="redirectToPayment('https://checkoutjpv2.jambopay.com/lipa/paybill/22250826')">21 Days - 35GB (Ksh 750)</button>
-        <button class="payment-btn" onclick="redirectToPayment('https://checkoutjpv2.jambopay.com/lipa/paybill/22250826')">30 Days - 50GB (Ksh 900)</button>
-        <button class="payment-btn" onclick="redirectToPayment('https://checkoutjpv2.jambopay.com/lipa/paybill/22250826')">6 Months - Unlimited (Ksh 4000)</button>
+        <button class="payment-btn" onclick="showPaymentInstructions('24 Hours - 7GB (Ksh 130)', 'https://checkoutjpv2.jambopay.com/lipa/paybill/22250826')">24 Hours - 7GB (Ksh 130)</button>
+        <button class="payment-btn" onclick="showPaymentInstructions('7 Days - 12GB (Ksh 300)', 'https://checkoutjpv2.jambopay.com/lipa/paybill/22250826')">7 Days - 12GB (Ksh 300)</button>
+        <button class="payment-btn" onclick="showPaymentInstructions('14 Days - 22GB (Ksh 550)', 'https://checkoutjpv2.jambopay.com/lipa/paybill/22250826')">14 Days - 22GB (Ksh 550)</button>
+        <button class="payment-btn" onclick="showPaymentInstructions('21 Days - 35GB (Ksh 750)', 'https://checkoutjpv2.jambopay.com/lipa/paybill/22250826')">21 Days - 35GB (Ksh 750)</button>
+        <button class="payment-btn" onclick="showPaymentInstructions('30 Days - 50GB (Ksh 900)', 'https://checkoutjpv2.jambopay.com/lipa/paybill/22250826')">30 Days - 50GB (Ksh 900)</button>
+        <button class="payment-btn" onclick="showPaymentInstructions('6 Months - Unlimited (Ksh 4000)', 'https://checkoutjpv2.jambopay.com/lipa/paybill/22250826')">6 Months - Unlimited (Ksh 4000)</button>
 
         <div class="inquiry">
             <p>In case of inquiry, contact us at:</p>
-            <a href="mailto:starrlinkg@gmail.com" class="email">support@starlink.ke</a>
+            <a href="https://wa.me/254104155254?text=Hi%2C%20I%20need%20help%20with%20Starlink%20offers" class="whatsapp-btn">
+                <i class="fab fa-whatsapp"></i> WhatsApp Support
+            </a>
+            <p>or</p>
+            <a href="mailto:starrlinkg@gmail.com" class="email">starrlinkg@gmail.com</a>
         </div>
     </div>
+
+    <!-- Payment Instructions Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2>Payment Instructions</h2>
+            <div class="instructions">
+                <p>To complete your purchase of <strong id="selectedPackage"></strong>:</p>
+                <ol>
+                    <li>Enter amount </li>
+                    <li>You will be redirected to our secure payment page, choose mobile money</li>
+                    <li>Enter your M-Pesa phone number</li>
+                    <li>Confirm the payment details</li>
+                    <li>Enter your M-Pesa PIN when prompted</li>
+                    <li>Wait for payment confirmation</li>
+                </ol>
+                <p><strong>Note:</strong> Your package will be activated immediately after successful payment.</p>
+            </div>
+            <button class="proceed-btn" id="proceedPaymentBtn">Proceed to Payment</button>
+        </div>
+    </div>
+
+    <script>
+        let paymentUrl = '';
+        
+        function showPaymentInstructions(packageName, url) {
+            paymentUrl = url;
+            document.getElementById('selectedPackage').textContent = packageName;
+            document.getElementById('paymentModal').style.display = 'flex';
+            
+            // Set up the proceed button
+            document.getElementById('proceedPaymentBtn').onclick = function() {
+                window.location.href = paymentUrl;
+            };
+        }
+        
+        function closeModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('paymentModal')) {
+                closeModal();
+            }
+        }
+    </script>
 </body>
 </html>
