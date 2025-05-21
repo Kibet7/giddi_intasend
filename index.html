@@ -109,16 +109,6 @@
             cursor: pointer;
             color: #888;
         }
-        .instructions {
-            text-align: left;
-            margin: 15px 0;
-        }
-        .instructions ol {
-            padding-left: 20px;
-        }
-        .instructions li {
-            margin-bottom: 10px;
-        }
         .proceed-btn {
             background: #148122;
             color: white;
@@ -147,6 +137,39 @@
         .whatsapp-btn i {
             margin-right: 8px;
         }
+        
+        /* Loading spinner styles */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #148122;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        .loading-text {
+            color: white;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -155,13 +178,13 @@
         <h1>Select a Package</h1>
         <div class="payment-info">Starlink Home <i>(Safaricom, Airtel, Telcom)</i></div>
         
-        <button class="payment-btn" onclick="showPaymentInstructions('24 Hours - 7GB (Ksh 130)', 'https://short.payhero.co.ke/s/SGftDgUDRCGvxNoRP5FhFm')">24 Hours - 7GB (Ksh 130)</button>
-        <button class="payment-btn" onclick="showPaymentInstructions('7 Days - 12GB (Ksh 300)', 'https://short.payhero.co.ke/s/ELPgQPhyKVK4nnwQW8ZFWT')">7 Days - 12GB (Ksh 300)</button>
-        <button class="payment-btn" onclick="showPaymentInstructions('14 Days - 22GB (Ksh 550)', 'https://short.payhero.co.ke/s/UFHqXjAvfKnjDDqxuc6ZLj')">14 Days - 22GB (Ksh 550)</button>
-        <button class="payment-btn" onclick="showPaymentInstructions('21 Days - 35GB (Ksh 750)', 'https://short.payhero.co.ke/s/4fAcBtv7XAaeS9YD75EHgU')">21 Days - 35GB (Ksh 750)</button>
-        <button class="payment-btn" onclick="showPaymentInstructions('30 Days - 50GB (Ksh 900)', 'https://short.payhero.co.ke/s/QERZfhA4xkoRNfTmoMNbPK')">30 Days - 50GB (Ksh 900)</button>
-        <button class="payment-btn" onclick="showPaymentInstructions('30 Days - 50GB (Ksh 1050)', 'https://short.payhero.co.ke/s/Ru29zTDNuAL6SbYgi3ZwFL')">30 Days - Unlimited (Ksh 1050)</button>
-        <button class="payment-btn" onclick="showPaymentInstructions('6 Months - Unlimited (Ksh 2000)', 'https://short.payhero.co.ke/s/hZCfzeD9KqEuNyJDQ8VBdq')">6 Months - Unlimited (Ksh 2000)</button>
+        <button class="payment-btn" onclick="showPaymentModal('24 Hours - 7GB (Ksh 130)', 'https://short.payhero.co.ke/s/SGftDgUDRCGvxNoRP5FhFm')">24 Hours - 7GB (Ksh 130)</button>
+        <button class="payment-btn" onclick="showPaymentModal('7 Days - 12GB (Ksh 300)', 'https://short.payhero.co.ke/s/ELPgQPhyKVK4nnwQW8ZFWT')">7 Days - 12GB (Ksh 300)</button>
+        <button class="payment-btn" onclick="showPaymentModal('14 Days - 22GB (Ksh 550)', 'https://short.payhero.co.ke/s/UFHqXjAvfKnjDDqxuc6ZLj')">14 Days - 22GB (Ksh 550)</button>
+        <button class="payment-btn" onclick="showPaymentModal('21 Days - 35GB (Ksh 750)', 'https://short.payhero.co.ke/s/4fAcBtv7XAaeS9YD75EHgU')">21 Days - 35GB (Ksh 750)</button>
+        <button class="payment-btn" onclick="showPaymentModal('30 Days - 50GB (Ksh 900)', 'https://short.payhero.co.ke/s/QERZfhA4xkoRNfTmoMNbPK')">30 Days - 50GB (Ksh 900)</button>
+        <button class="payment-btn" onclick="showPaymentModal('30 Days - 50GB (Ksh 1050)', 'https://short.payhero.co.ke/s/Ru29zTDNuAL6SbYgi3ZwFL')">30 Days - Unlimited (Ksh 1050)</button>
+        <button class="payment-btn" onclick="showPaymentModal('6 Months - Unlimited (Ksh 2000)', 'https://short.payhero.co.ke/s/hZCfzeD9KqEuNyJDQ8VBdq')">6 Months - Unlimited (Ksh 2000)</button>
 
         <div class="inquiry">
             <p>In case of inquiry, contact us at:</p>
@@ -173,43 +196,51 @@
         </div>
     </div>
 
-    <!-- Payment Instructions Modal -->
+    <!-- Confirmation Modal -->
     <div id="paymentModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2>Payment Instructions</h2>
-            <div class="instructions">
-                <p>To complete your purchase of <strong id="selectedPackage"></strong>:</p>
-                <ol>
-                    <li>Enter amount </li>
-                    <li>You will be redirected to our secure payment page, choose mobile money</li>
-                    <li>Enter your M-Pesa phone number</li>
-                    <li>Confirm the payment details</li>
-                    <li>Enter your M-Pesa PIN when prompted</li>
-                    <li>Wait for payment confirmation</li>
-                </ol>
-                <p><strong>Note:</strong> Your package will be activated immediately after successful payment.</p>
-            </div>
+            <h2>Confirm Package</h2>
+            <p>You have selected: <strong id="selectedPackage"></strong></p>
             <button class="proceed-btn" id="proceedPaymentBtn">Proceed to Payment</button>
         </div>
+    </div>
+    
+    <!-- Loading overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <div class="loading-text">Processing your request...</div>
     </div>
 
     <script>
         let paymentUrl = '';
         
-        function showPaymentInstructions(packageName, url) {
+        function showPaymentModal(packageName, url) {
             paymentUrl = url;
             document.getElementById('selectedPackage').textContent = packageName;
             document.getElementById('paymentModal').style.display = 'flex';
             
             // Set up the proceed button
             document.getElementById('proceedPaymentBtn').onclick = function() {
-                window.location.href = paymentUrl;
+                showLoadingAndRedirect();
             };
         }
         
         function closeModal() {
             document.getElementById('paymentModal').style.display = 'none';
+        }
+        
+        function showLoadingAndRedirect() {
+            // Show loading overlay
+            document.getElementById('loadingOverlay').style.display = 'flex';
+            
+            // Close the modal
+            closeModal();
+            
+            // Redirect after a short delay to allow the loading screen to show
+            setTimeout(function() {
+                window.location.href = paymentUrl;
+            }, 1500);
         }
         
         // Close modal when clicking outside
