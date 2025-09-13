@@ -3,421 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service.starlink.ke</title>
+    <title>Access Restricted - Error 451</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@500;600&display=swap');
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #2b0a3a, #1a0630);
+        * {
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
-            color: #fff;
-            overflow-x: hidden;
-            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
         
-        /* New Starlink Satellite Animation */
-        .starlink-satellite {
-            position: fixed;
-            top: 30px;
-            left: -100px;
-            font-size: 24px;
-            color: white;
-            animation: floatSatellite 45s linear infinite;
-            z-index: 1;
-            opacity: 0.8;
-            filter: drop-shadow(0 0 8px rgba(156, 77, 255, 0.7));
-        }
-        
-        @keyframes floatSatellite {
-            0% {
-                transform: translateX(-100px) rotate(0deg);
-            }
-            100% {
-                transform: translateX(calc(100vw + 100px)) rotate(360deg);
-            }
-        }
-        
-        .premium-container {
-            background: rgba(255, 255, 255, 0.97);
-            padding: 30px;
-            border-radius: 18px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-            text-align: center;
-            max-width: 580px;
-            width: 90%;
-            color: #333;
-            margin: 20px 0;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(8px);
-            position: relative;
-            z-index: 2;
-        }
-        
-        .premium-header {
-            position: relative;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-        }
-        
-        .premium-header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 30%;
-            width: 40%;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, #ff4d8d, #9c4dff, transparent);
-            border-radius: 4px;
-        }
-        
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            margin: 0;
-            color: #2b0a3a;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        
-        .service-badge {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 8px 22px;
-            background: linear-gradient(135deg, #ff4d8d, #9c4dff);
-            border-radius: 24px;
-            font-size: 15px;
-            font-weight: 600;
-            color: white;
-            box-shadow: 0 6px 12px rgba(156, 77, 255, 0.2);
-            border: none;
-        }
-        
-        .package-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 30px 0;
-        }
-        
-        .premium-btn {
-            background: linear-gradient(135deg, #9c4dff, #6e3dcc);
-            color: white;
-            border: none;
-            padding: 16px 10px;
-            font-size: 15px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(156, 77, 255, 0.25);
-            position: relative;
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            min-height: 60px;
+        }
+        
+        .header {
+            background: #ff4757;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .error-code {
+            font-size: 6rem;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.2);
+            position: absolute;
+            top: 20px;
+            right: 30px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .reason {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid #ff4757;
+        }
+        
+        .reason h3 {
+            color: #ff4757;
+            margin-bottom: 10px;
+        }
+        
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
+            gap: 8px;
         }
         
-        .premium-btn:nth-child(odd) {
-            background: linear-gradient(135deg, #ff4d8d, #ff2d72);
-            box-shadow: 0 5px 15px rgba(255, 77, 141, 0.25);
+        .btn-primary {
+            background: #3867d6;
+            color: white;
         }
         
-        .premium-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: 0.5s;
+        .btn-primary:hover {
+            background: #2a52b9;
         }
         
-        .premium-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(156, 77, 255, 0.35);
+        .btn-secondary {
+            background: #f1f2f6;
+            color: #2f3542;
         }
         
-        .premium-btn:nth-child(odd):hover {
-            box-shadow: 0 8px 20px rgba(255, 77, 141, 0.35);
+        .btn-secondary:hover {
+            background: #dfe4ea;
         }
         
-        .premium-btn:hover::before {
-            left: 100%;
-        }
-        
-        .support-card {
+        .contact {
             margin-top: 30px;
-            padding: 20px;
-            background: linear-gradient(135deg, #f9f3ff, #ffffff);
-            border-radius: 14px;
-            box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(156, 77, 255, 0.15);
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
         }
         
-        .support-title {
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 12px;
-            font-weight: 500;
-        }
-        
-        .support-email {
-            color: #9c4dff;
-            font-weight: 600;
+        .contact a {
+            color: #3867d6;
             text-decoration: none;
-            transition: all 0.3s;
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 8px;
-            background: rgba(156, 77, 255, 0.1);
         }
         
-        .support-email:hover {
-            color: #7d3dcc;
+        .contact a:hover {
             text-decoration: underline;
-            background: rgba(156, 77, 255, 0.15);
         }
         
-        /* Premium Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            z-index: 100;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(8px);
-        }
-        
-        .modal-content {
-            background: white;
-            padding: 35px;
-            border-radius: 16px;
-            max-width: 480px;
-            width: 90%;
-            color: #333;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .modal-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 6px;
-            height: 100%;
-            background: linear-gradient(to bottom, #ff4d8d, #9c4dff);
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 26px;
-            cursor: pointer;
-            color: #aaa;
-            transition: 0.3s;
-        }
-        
-        .close-modal:hover {
-            color: #ff4d8d;
-            transform: rotate(90deg);
-        }
-        
-        .modal h2 {
-            margin-top: 0;
-            color: #2b0a3a;
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
-            font-size: 26px;
-        }
-        
-        .modal p {
-            font-size: 16px;
-            margin-bottom: 25px;
-            color: #555;
-        }
-        
-        .proceed-btn {
-            background: linear-gradient(135deg, #9c4dff, #6e3dcc);
-            color: white;
-            border: none;
-            padding: 16px;
-            border-radius: 10px;
-            font-weight: 600;
-            width: 100%;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(156, 77, 255, 0.3);
-            font-size: 16px;
-            margin-top: 10px;
-        }
-        
-        .proceed-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(156, 77, 255, 0.4);
-        }
-        
-        /* Loading overlay */
-        .loading-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.9);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            backdrop-filter: blur(5px);
-        }
-        
-        .spinner {
-            width: 70px;
-            height: 70px;
-            border: 6px solid rgba(243, 243, 243, 0.2);
-            border-top: 6px solid #9c4dff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 25px;
-        }
-        
-        .loading-text {
-            color: white;
-            font-size: 18px;
-            margin-top: 10px;
-            letter-spacing: 0.8px;
-            font-weight: 500;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Responsive adjustments */
         @media (max-width: 600px) {
-            .package-grid {
-                grid-template-columns: 1fr;
+            .header h1 {
+                font-size: 1.8rem;
             }
             
-            .premium-container {
-                padding: 25px 20px;
+            .error-code {
+                font-size: 4rem;
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-top: 10px;
             }
             
-            h1 {
-                font-size: 28px;
+            .content {
+                padding: 25px;
             }
             
-            .starlink-satellite {
-                font-size: 18px;
-                top: 20px;
-                animation-duration: 30s;
+            .actions {
+                flex-direction: column;
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Starlink Satellite Animation -->
-    <div class="starlink-satellite">
-        <i class="fas fa-satellite-dish"></i>
-    </div>
-    
-    <div class="premium-container">
-        <div class="premium-header">
-            <h1>Starlink Premium</h1>
-            <div class="service-badge">High-Speed Internet Packages</div>
+    <div class="container">
+        <div class="header">
+            <h1>Website Access Restricted</h1>
+            <p>This site is not available in your region</p>
+            <div class="error-code">451</div>
         </div>
         
-        <div class="package-grid">
-            <button class="premium-btn" onclick="showPaymentModal('24 Hours - 7GB (Ksh 79)', '8600480')">24 Hours<br>7GB (Ksh 79)</button>
-            <button class="premium-btn" onclick="showPaymentModal('7 Days - 12GB (Ksh 89)', '8600480')">7 Days<br>12GB (Ksh 89)</button>
-            <button class="premium-btn" onclick="showPaymentModal('14 Days - 22GB (Ksh 110)', '8600480')">14 Days<br>22GB (Ksh 110)</button>
-            <button class="premium-btn" onclick="showPaymentModal('21 Days - 35GB (Ksh 130)', '8600480')">21 Days<br>35GB (Ksh 130)</button>
-            <button class="premium-btn" onclick="showPaymentModal('30 Days - 50GB (Ksh 159)', '8600480')">30 Days<br>50GB (Ksh 159)</button>
-            <button class="premium-btn" onclick="showPaymentModal('2 Months - Unlimited (Ksh 220)', '8600480')">2 Months<br>Unlimited (Ksh 220)</button>
-        </div>
-        
-        <div class="support-card">
-            <div class="support-title">Premium Support Available 24/7</div>
-            <a href="mailto:starlinkhelp01@gmail.com" class="support-email">starrlinkhelp.com</a>
-        </div>
-    </div>
-
-    <!-- Premium Modal -->
-    <div id="paymentModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2>Confirm Package</h2>
-            <p>You've selected our premium package:</p>
-            <p><strong id="selectedPackage"></strong></p>
-            <p>Please follow these M-Pesa payment instructions:</p>
-            <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin: 15px 0; text-align: left;">
-                <p><strong>1.</strong> Go to M-Pesa on your phone</p>
-                <p><strong>2.</strong> Select <strong>Lipa na M-Pesa</strong></p>
-                <p><strong>3.</strong> Select <strong>Buy Goods</strong></p>
-                <p><strong>4.</strong> Enter Till Number: <strong id="tillNumber" style="background: #e0e0e0; padding: 2px 5px; border-radius: 4px;">8600480</strong> 
-                   <button onclick="copyTillNumber()" style="background: #9c4dff; color: white; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; margin-left: 5px;">Copy</button></p>
-                <p><strong>5.</strong> Enter the amount shown for your package</p>
-                <p><strong>6.</strong> Enter your M-Pesa PIN and confirm <b>     BMS VENTURES</b></p>
+        <div class="content">
+            <div class="reason">
+                <h3>Why am I seeing this page?</h3>
+                <p>Access to this website has been restricted due to a legal request or regulatory requirements. Error 451 indicates that the resource is unavailable for legal reasons, which may include:</p>
+                <ul style="margin: 15px 0 15px 30px;">
+                    <li>Government censorship requirements</li>
+                    <li>Copyright infringement claims</li>
+                    <li>Court orders</li>
+                    <li>Violation of terms of service</li>
+                </ul>
+                <p>This restriction is not due to a technical error with your device or network.</p>
             </div>
-            <p>Your package will be activated automatically after payment confirmation.</p>
+            
+            <h3>What can I do?</h3>
+            <p>If you believe this restriction is incorrect, you may:</p>
+            
+            <div class="actions">
+                <button class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                    Request Review
+                </button>
+                
+                <button class="btn btn-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
+                    </svg>
+                    Share Details
+                </button>
+                
+                <button class="btn btn-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.95-2.675 2.217zm4.17 4.147a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5z"/>
+                    </svg>
+                    More Info
+                </button>
+            </div>
+            
+            <div class="contact">
+                <p>For more information, please contact our support team at <a href="mailto:support@vercelspam.com">email</a></p>
+            </div>
         </div>
-    </div>
-    
-    <!-- Loading overlay -->
-    <div id="loadingOverlay" class="loading-overlay">
-        <div class="spinner"></div>
-        <div class="loading-text">Processing your premium package...</div>
     </div>
 
     <script>
-        let paymentUrl = '';
-        
-        function showPaymentModal(packageName, tillNumber) {
-            document.getElementById('selectedPackage').textContent = packageName;
-            document.getElementById('tillNumber').textContent = tillNumber;
-            document.getElementById('paymentModal').style.display = 'flex';
-        }
-        
-        function closeModal() {
-            document.getElementById('paymentModal').style.display = 'none';
-        }
-        
-        function copyTillNumber() {
-            const tillNumber = document.getElementById('tillNumber').textContent;
-            navigator.clipboard.writeText(tillNumber).then(() => {
-                alert('Till number copied to clipboard: ' + tillNumber);
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
+        // Simple functionality for demonstration
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Functionality for "' + this.textContent.trim() + '" would be implemented here.');
             });
-        }
-        
-        window.onclick = function(event) {
-            if (event.target == document.getElementById('paymentModal')) {
-                closeModal();
-            }
-        }
+        });
     </script>
 </body>
-</html>
+            </html>
