@@ -21,25 +21,101 @@
             position: relative;
         }
         
-        /* New Starlink Satellite Animation */
-        .starlink-satellite {
+        /* Starlink Satellite Train Animation */
+        .satellite-train {
             position: fixed;
-            top: 30px;
-            left: -100px;
-            font-size: 24px;
-            color: white;
-            animation: floatSatellite 45s linear infinite;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            height: 60px;
             z-index: 1;
-            opacity: 0.8;
-            filter: drop-shadow(0 0 8px rgba(77, 171, 255, 0.7));
+            overflow: hidden;
         }
         
-        @keyframes floatSatellite {
+        .satellite {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(77, 171, 255, 0.8);
+            animation: flyAcross 20s linear infinite;
+            opacity: 0.9;
+        }
+        
+        .satellite::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: #4d9cff;
+            border-radius: 50%;
+        }
+        
+        .satellite::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
+        }
+        
+        /* Create multiple satellites with different delays */
+        .satellite:nth-child(1) {
+            top: 10px;
+            animation-delay: 0s;
+            width: 24px;
+            height: 24px;
+        }
+        
+        .satellite:nth-child(2) {
+            top: 40px;
+            animation-delay: 2s;
+        }
+        
+        .satellite:nth-child(3) {
+            top: 25px;
+            animation-delay: 4s;
+            width: 18px;
+            height: 18px;
+        }
+        
+        .satellite:nth-child(4) {
+            top: 5px;
+            animation-delay: 6s;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .satellite:nth-child(5) {
+            top: 35px;
+            animation-delay: 8s;
+            width: 22px;
+            height: 22px;
+        }
+        
+        @keyframes flyAcross {
             0% {
-                transform: translateX(-100px) rotate(0deg);
+                left: -50px;
+                transform: translateY(0);
+            }
+            25% {
+                transform: translateY(3px);
+            }
+            50% {
+                transform: translateY(0);
+            }
+            75% {
+                transform: translateY(-3px);
             }
             100% {
-                transform: translateX(calc(100vw + 100px)) rotate(360deg);
+                left: 100%;
+                transform: translateY(0);
             }
         }
         
@@ -328,19 +404,30 @@
                 font-size: 28px;
             }
             
-            .starlink-satellite {
-                font-size: 18px;
-                top: 20px;
-                animation-duration: 30s;
+            .satellite-train {
+                height: 40px;
+            }
+            
+            .satellite {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .satellite::after {
+                width: 30px;
             }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Starlink Satellite Animation -->
-    <div class="starlink-satellite">
-        <i class="fas fa-satellite-dish"></i>
+    <!-- Starlink Satellite Train Animation -->
+    <div class="satellite-train">
+        <div class="satellite"></div>
+        <div class="satellite"></div>
+        <div class="satellite"></div>
+        <div class="satellite"></div>
+        <div class="satellite"></div>
     </div>
     
     <div class="premium-container">
