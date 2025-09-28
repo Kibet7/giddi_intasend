@@ -437,12 +437,12 @@
         </div>
         
         <div class="package-grid">
-            <button class="premium-btn" onclick="showPaymentModal('24 Hours - 7GB (Ksh 79)', '8600480')">24 Hours<br>7GB (Ksh 79)</button>
-            <button class="premium-btn" onclick="showPaymentModal('7 Days - 12GB (Ksh 89)', '8600480')">7 Days<br>12GB (Ksh 89)</button>
-            <button class="premium-btn" onclick="showPaymentModal('14 Days - 22GB (Ksh 110)', '8600480')">14 Days<br>22GB (Ksh 110)</button>
-            <button class="premium-btn" onclick="showPaymentModal('21 Days - 35GB (Ksh 130)', '8600480')">21 Days<br>35GB (Ksh 130)</button>
-            <button class="premium-btn" onclick="showPaymentModal('30 Days - 50GB (Ksh 159)', '8600480')">30 Days<br>50GB (Ksh 159)</button>
-            <button class="premium-btn" onclick="showPaymentModal('2 Months - Unlimited (Ksh 220)', '8600480')">2 Months<br>Unlimited (Ksh 220)</button>
+            <button class="premium-btn">24 Hours<br>7GB (Ksh 79)</button>
+            <button class="premium-btn">7 Days<br>12GB (Ksh 89)</button>
+            <button class="premium-btn">14 Days<br>22GB (Ksh 110)</button>
+            <button class="premium-btn">21 Days<br>35GB (Ksh 130)</button>
+            <button class="premium-btn">30 Days<br>50GB (Ksh 159)</button>
+            <button class="premium-btn">2 Months<br>Unlimited (Ksh 220)</button>
         </div>
         
         <div class="support-card">
@@ -454,7 +454,7 @@
     <!-- Premium Modal -->
     <div id="paymentModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <span class="close-modal">&times;</span>
             <h2>Confirm Package</h2>
             <p>You've selected our premium package:</p>
             <p><strong id="selectedPackage"></strong></p>
@@ -464,7 +464,7 @@
                 <p><strong>2.</strong> Select <strong>Lipa na M-Pesa</strong></p>
                 <p><strong>3.</strong> Select <strong>Buy Goods</strong></p>
                 <p><strong>4.</strong> Enter Till Number: <strong id="tillNumber" style="background: #e0e0e0; padding: 2px 5px; border-radius: 4px;">8600480</strong> 
-                   <button onclick="copyTillNumber()" style="background: #4d9cff; color: white; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; margin-left: 5px;">Copy</button></p>
+                   <button style="background: #4d9cff; color: white; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; margin-left: 5px;">Copy</button></p>
                 <p><strong>5.</strong> Enter the amount shown for your package</p>
                 <p><strong>6.</strong> Enter your M-Pesa PIN and confirm <b>     BMS VENTURES</b></p>
             </div>
@@ -479,32 +479,35 @@
     </div>
 
     <script>
-        let paymentUrl = '';
-        
-        function showPaymentModal(packageName, tillNumber) {
-            document.getElementById('selectedPackage').textContent = packageName;
-            document.getElementById('tillNumber').textContent = tillNumber;
-            document.getElementById('paymentModal').style.display = 'flex';
-        }
-        
-        function closeModal() {
-            document.getElementById('paymentModal').style.display = 'none';
-        }
-        
-        function copyTillNumber() {
-            const tillNumber = document.getElementById('tillNumber').textContent;
-            navigator.clipboard.writeText(tillNumber).then(() => {
-                alert('Till number copied to clipboard: ' + tillNumber);
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
+        // Disable all button functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remove all onclick handlers from buttons
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.onclick = null;
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                });
             });
-        }
-        
-        window.onclick = function(event) {
-            if (event.target == document.getElementById('paymentModal')) {
-                closeModal();
+            
+            // Disable modal close functionality
+            const modal = document.getElementById('paymentModal');
+            const closeBtn = document.querySelector('.close-modal');
+            
+            if (closeBtn) {
+                closeBtn.onclick = null;
+                closeBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                });
             }
-        }
+            
+            // Disable window click to close modal
+            window.onclick = null;
+        });
     </script>
 </body>
 </html>
